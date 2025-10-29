@@ -17,12 +17,10 @@ export const getComets = async (search?: string): Promise<Comet[]> => {
 
         const data = await response.json()
 
-        // Если API возвращает пагинацию с results
         if (Array.isArray(data.results)) {
             return data.results
         }
 
-        // Если API возвращает просто массив
         if (Array.isArray(data)) {
             return data
         }
@@ -30,7 +28,6 @@ export const getComets = async (search?: string): Promise<Comet[]> => {
         return []
     } catch (error) {
         console.error('Error fetching comets:', error)
-        // Fallback на mock данные
         if (search) {
             return COMETS_MOCK.filter(comet =>
                 comet.name.toLowerCase().includes(search.toLowerCase())
