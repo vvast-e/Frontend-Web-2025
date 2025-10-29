@@ -4,7 +4,7 @@
 
 .toolbar {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     gap: 16px;
     align-items: center;
     margin-bottom: 24px;
@@ -26,7 +26,7 @@
 
 .search-form button {
     padding: 8px 12px;
-    border: none;
+    border: 1px solid #000;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
@@ -107,3 +107,34 @@
     color: #fff;
 }
 
+/* cart widget styled like Django template */
+.cart-card {
+    justify-self: end;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #111827;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.cart-card:hover {
+    border-color: #000;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+}
+
+.cart-title {
+    font-weight: 600;
+}
+
+.cart-count {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.cart-card.inactive {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
