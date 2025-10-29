@@ -56,6 +56,13 @@ export const CometsPage: FC = () => {
                             Найти
                         </button>
                     </form>
+                    <div className="cart-stub" aria-label="cart">
+                        <span className="cart-title">Корзина</span>
+                        <span className="cart-sep">·</span>
+                        <span className="cart-info">заявка # -1</span>
+                        <span className="cart-sep">·</span>
+                        <span className="cart-count">позиций 0</span>
+                    </div>
                 </section>
 
                 {loading && (

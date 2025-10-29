@@ -28,6 +28,16 @@ export const CometCard: FC<CometCardProps> = ({ comet }) => {
                 <h3 className="card-title">{comet.name}</h3>
                 <div className="card-meta">
                     <span className="price">{comet.price} ₽</span>
+                    <button
+                        className="btn btn-red add-btn"
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            // Заглушка: без реального запроса
+                            console.debug('Добавить (stub): cometId=', comet.id)
+                        }}
+                    >
+                        Добавить
+                    </button>
                 </div>
             </div>
         </div>
