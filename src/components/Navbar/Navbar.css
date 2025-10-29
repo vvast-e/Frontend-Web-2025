@@ -1,0 +1,20 @@
+.app-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #000;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.home-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.home-link:hover {
+    color: #fc3d21;
+}
+
