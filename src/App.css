@@ -1,0 +1,47 @@
+:root {
+    --nasa-blue: #000000;
+    --nasa-red: #fc3d21;
+    --bg-light: #f5f7fa;
+    --text-dark: #111827;
+    --border-gray: #e5e7eb;
+    --text-muted: #6b7280;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-light);
+    line-height: 1.5;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 16px;
+    flex: 1;
+}
+
+.app-footer {
+    border-top: 1px solid var(--border-gray);
+    margin-top: 2rem;
+    padding: 16px;
+    text-align: center;
+    color: var(--text-muted);
+    background: #fff;
+}
+
+.app-footer p {
+    margin: 0;
+}
+

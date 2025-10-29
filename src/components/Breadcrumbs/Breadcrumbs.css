@@ -1,0 +1,32 @@
+.breadcrumbs {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    margin: 0;
+    align-items: center;
+}
+
+.breadcrumbs a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.breadcrumbs a:hover {
+    color: #000;
+}
+
+.breadcrumbs .active {
+    color: #000;
+}
+
+.breadcrumbs li:first-child a {
+    color: #6b7280;
+}
+
+.breadcrumbs .slash {
+    color: #6b7280;
+    list-style: none;
+}
+
