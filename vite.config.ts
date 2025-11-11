@@ -2,8 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// Конфигурация для GitHub Pages
+const REPO_NAME = 'Frontend-Web-2025'
+// Для GitHub Pages используем base = /RepoName, для локальной разработки = /
+// При сборке (npm run build) автоматически будет использоваться base для GitHub Pages
+const BASE_PATH = process.env.NODE_ENV === 'production' ? `/${REPO_NAME}` : '/'
+
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: BASE_PATH,
     plugins: [
         react(),
         VitePWA({
@@ -14,19 +21,19 @@ export default defineConfig({
             manifest: {
                 name: 'Расчёт расстояния комет от Солнца',
                 short_name: 'Кометы',
-                start_url: '/', // Будет изменено при настройке GitHub Pages
+                start_url: `${BASE_PATH}/`,
                 display: 'standalone',
                 background_color: '#ffffff',
                 theme_color: '#f64137',
                 orientation: 'portrait-primary',
                 icons: [
                     {
-                        src: '/default-comet.png',
+                        src: `${BASE_PATH}/default-comet.png`,
                         type: 'image/png',
                         sizes: '192x192',
                     },
                     {
-                        src: '/default-comet.png',
+                        src: `${BASE_PATH}/default-comet.png`,
                         type: 'image/png',
                         sizes: '512x512',
                     },
