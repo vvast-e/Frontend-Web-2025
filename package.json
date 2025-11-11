@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tauri": "tauri"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
@@ -14,12 +15,18 @@
     "vite": "^7.1.7"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.10.1",
+    "@tauri-apps/api": "^2.9.0",
+    "@tauri-apps/cli": "^2.9.4",
+    "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "bootstrap": "^5.3.8",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.4"
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.4",
+    "vite-plugin-pwa": "^1.1.0"
   }
 }

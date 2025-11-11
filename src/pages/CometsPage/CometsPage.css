@@ -10,9 +10,31 @@
     margin-bottom: 24px;
 }
 
+@media (max-width: 768px) {
+    .toolbar {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
 .search-form {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    .search-form {
+        flex-direction: column;
+    }
+    
+    .search-form input[type="text"] {
+        width: 100%;
+    }
+    
+    .search-form button {
+        width: 100%;
+    }
 }
 
 .search-form input[type="text"] {
@@ -105,6 +127,18 @@
     background: #b60109;
     border-color: #b60109;
     color: #fff;
+}
+
+.btn-light {
+    background: #f7f7f7;
+    color: #333;
+    border-color: #e5e7eb;
+}
+
+.btn-light:hover {
+    background: #e5e7eb;
+    border-color: #d1d5db;
+    color: #333;
 }
 
 /* cart widget styled like Django template */

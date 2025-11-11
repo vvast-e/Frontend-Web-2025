@@ -1,7 +1,8 @@
 import { Comet } from '../types'
 import { COMETS_MOCK } from './mock'
+import { dest_api } from '../config/target_config'
 
-const API_BASE_URL = '/api/comets'
+const API_BASE_URL = `${dest_api}/comets`
 
 export const getComets = async (search?: string): Promise<Comet[]> => {
     try {
