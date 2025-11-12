@@ -14,6 +14,7 @@ export const CometsPage: FC = () => {
     const title = useAppSelector((state) => state.filters.title)
     const [loading, setLoading] = useState(false)
     const [comets, setComets] = useState<Comet[]>([])
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         loadComets()
@@ -21,12 +22,14 @@ export const CometsPage: FC = () => {
 
     const loadComets = async (searchTitle?: string) => {
         setLoading(true)
+        setError(null)
         try {
             const searchValue = searchTitle !== undefined ? searchTitle : title
             const data = await getComets(searchValue || undefined)
             setComets(data)
-        } catch (error) {
-            console.error('Error loading comets:', error)
+        } catch (error: any) {
+            setError('Не удалось подключиться к серверу. Убедитесь, что бэкенд запущен.')
+            setComets([])
         } finally {
             setLoading(false)
         }
@@ -86,7 +89,13 @@ export const CometsPage: FC = () => {
                     </div>
                 )}
 
-                {!loading && comets.length === 0 && (
+                {!loading && error && (
+                    <div className="error-message" style={{ padding: '20px', textAlign: 'center', color: '#d32f2f' }}>
+                        <p>{error}</p>
+                    </div>
+                )}
+
+                {!loading && !error && comets.length === 0 && (
                     <p className="no-results">Кометы не найдены</p>
                 )}
 

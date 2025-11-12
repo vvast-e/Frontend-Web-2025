@@ -1,16 +1,22 @@
 import { Comet } from '../types'
 import { COMETS_MOCK } from './mock'
-import { dest_api } from '../config/target_config'
+import { dest_api, use_mock_fallback } from '../config/target_config'
 
 const API_BASE_URL = `${dest_api}/comets`
 
 export const getComets = async (search?: string): Promise<Comet[]> => {
     try {
         const url = search
-            ? `${API_BASE_URL}/?search=${encodeURIComponent(search)}`
+            ? `${API_BASE_URL}/?name=${encodeURIComponent(search)}`
             : `${API_BASE_URL}/`
 
-        const response = await fetch(url)
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -24,11 +30,15 @@ export const getComets = async (search?: string): Promise<Comet[]> => {
             comets = data.results
         } else if (Array.isArray(data)) {
             comets = data
+        } else {
+            throw new Error(`Unexpected data format: ${JSON.stringify(data)}`)
         }
 
         return comets
     } catch (error) {
-        console.error('Error fetching comets:', error)
+        if (!use_mock_fallback) {
+            throw error
+        }
         if (search) {
             return COMETS_MOCK.filter(comet =>
                 comet.name.toLowerCase().includes(search.toLowerCase())
@@ -40,7 +50,13 @@ export const getComets = async (search?: string): Promise<Comet[]> => {
 
 export const getCometById = async (id: number): Promise<Comet | null> => {
     try {
-        const response = await fetch(`${API_BASE_URL}/${id}/`)
+        const response = await fetch(`${API_BASE_URL}/${id}/`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -49,8 +65,9 @@ export const getCometById = async (id: number): Promise<Comet | null> => {
         const data = await response.json()
         return data
     } catch (error) {
-        console.error('Error fetching comet:', error)
-        // Fallback на mock данные
+        if (!use_mock_fallback) {
+            throw error
+        }
         const mockComet = COMETS_MOCK.find(comet => comet.id === id)
         return mockComet || null
     }

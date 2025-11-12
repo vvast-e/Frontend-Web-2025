@@ -12,13 +12,15 @@
 // Переключение между режимами
 export const target_tauri = true
 
+// Использовать мок-данные при недоступности бэкенда (только для веб-версии)
+export const use_mock_fallback = !target_tauri
+
 // IP адрес компьютера в локальной сети
 // ЗАМЕНИТЕ НА ВАШ IP АДРЕС когда будете настраивать Tauri
 // Найти IP можно командой: ipconfig (в командной строке)
-// Текущий IP: 192.168.1.74 (обновляйте при смене сети)
-// Альтернативный IP: 192.168.56.1 (если первый не работает)
-export const api_proxy_addr = "http://192.168.1.74:8000"
-export const img_proxy_addr = "http://192.168.1.74:9002" // MinIO на порту 9002!
+// Текущий IP: 172.16.239.76 (университетская сеть)
+export const api_proxy_addr = "http://172.16.239.76:8000/api"  // /api для API endpoints
+export const img_proxy_addr = "http://172.16.239.76:9002" // MinIO на порту 9002!
 
 // Для Tauri используем прямые IP адреса
 export const dest_api = api_proxy_addr
@@ -36,17 +38,17 @@ export const getImageUrl = (imageUrl: string | null): string => {
     if (!imageUrl) {
         return getDefaultImagePath()
     }
-    
+
     // Если это уже полный URL (http://...), возвращаем как есть
     if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
         return imageUrl
     }
-    
+
     // Если это относительный путь, начинающийся с /img-proxy, заменяем на dest_img для Tauri
     if (imageUrl.startsWith('/img-proxy')) {
         return imageUrl.replace('/img-proxy', img_proxy_addr)
     }
-    
+
     // Для других относительных путей возвращаем как есть
     return imageUrl
 }
