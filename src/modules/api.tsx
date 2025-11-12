@@ -18,15 +18,15 @@ export const getComets = async (search?: string): Promise<Comet[]> => {
 
         const data = await response.json()
 
+        let comets: Comet[] = []
+        
         if (Array.isArray(data.results)) {
-            return data.results
+            comets = data.results
+        } else if (Array.isArray(data)) {
+            comets = data
         }
 
-        if (Array.isArray(data)) {
-            return data
-        }
-
-        return []
+        return comets
     } catch (error) {
         console.error('Error fetching comets:', error)
         if (search) {

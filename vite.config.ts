@@ -6,9 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 const REPO_NAME = 'Frontend-Web-2025'
 // Для GitHub Pages используем base = /RepoName, для локальной разработки = /
 // При сборке (npm run build) автоматически будет использоваться base для GitHub Pages
-// Для Tauri билда (npm run build:tauri) используем base = /
-const isTauriBuild = process.env.TAURI_BUILD === 'true' || process.env.TAURI_PLATFORM !== undefined
-const isProduction = process.env.NODE_ENV === 'production' && !isTauriBuild
+const isProduction = process.env.NODE_ENV === 'production'
 const BASE_PATH = isProduction ? `/${REPO_NAME}` : '/'
 const START_URL = isProduction ? `/${REPO_NAME}/` : '/'
 const ICON_PATH = isProduction ? `/${REPO_NAME}/icon-192.png` : '/icon-192.png'
