@@ -16,7 +16,7 @@
  */
 
 // Переключение между режимами
-const target_tauri = false
+export const target_tauri = false
 
 // Название репозитория для GitHub Pages
 const REPO_NAME = "Frontend-Web-2025"
@@ -24,9 +24,10 @@ const REPO_NAME = "Frontend-Web-2025"
 // IP адрес компьютера в локальной сети
 // ЗАМЕНИТЕ НА ВАШ IP АДРЕС когда будете настраивать Tauri
 // Найти IP можно командой: ipconfig (в командной строке)
-// Текущий IP: 172.16.239.76 (обновляйте при смене сети)
-export const api_proxy_addr = "http://172.16.239.76:8000"
-export const img_proxy_addr = "http://172.16.239.76:9002" // MinIO на порту 9002!
+// Текущий IP: 192.168.1.74 (обновляйте при смене сети)
+// Альтернативный IP: 192.168.56.1 (если первый не работает)
+export const api_proxy_addr = "http://192.168.1.74:8000"
+export const img_proxy_addr = "http://192.168.1.74:9002" // MinIO на порту 9002!
 
 // Для веб-режима используем прокси, для Tauri - прямые IP адреса
 export const dest_api = target_tauri ? api_proxy_addr : "/api"
@@ -36,10 +37,10 @@ export const dest_img = target_tauri ? img_proxy_addr : "/img-proxy"
 // На GitHub Pages будет /Frontend-Web-2025, локально - пустая строка
 function getBasePath(): string {
     if (typeof window === 'undefined') return ''
-    
+
     // Проверяем, работаем ли мы на GitHub Pages
     const isGitHubPages = window.location.hostname.includes('github.io')
-    
+
     if (isGitHubPages) {
         // Извлекаем basename из текущего URL
         const path = window.location.pathname
@@ -48,10 +49,33 @@ function getBasePath(): string {
             return `/${REPO_NAME}`
         }
     }
-    
+
     return ''
 }
 
 export const dest_root = getBasePath()
 
+// Функция для получения пути к изображению по умолчанию с учетом базового пути
+export const getDefaultImagePath = () => `${dest_root}/default-comet.png`
+
+// Функция для преобразования URL изображения для Tauri
+// Если image_url начинается с /img-proxy, заменяем на dest_img
+export const getImageUrl = (imageUrl: string | null): string => {
+    if (!imageUrl) {
+        return getDefaultImagePath()
+    }
+
+    // Если это уже полный URL (http://...), возвращаем как есть
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+        return imageUrl
+    }
+
+    // Если это относительный путь, начинающийся с /img-proxy, заменяем на dest_img для Tauri
+    if (target_tauri && imageUrl.startsWith('/img-proxy')) {
+        return imageUrl.replace('/img-proxy', img_proxy_addr)
+    }
+
+    // Для веб-режима возвращаем как есть (прокси обработает)
+    return imageUrl
+}
 

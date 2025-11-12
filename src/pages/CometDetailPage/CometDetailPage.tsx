@@ -4,10 +4,11 @@ import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs'
 import { ROUTES, ROUTE_LABELS } from '../../Routes'
 import { Comet } from '../../types'
 import { getCometById } from '../../modules/api'
+import { getDefaultImagePath } from '../../config/target_config'
 import { Spinner } from 'react-bootstrap'
 import './CometDetailPage.css'
 
-const defaultImage = '/default-comet.png'
+const defaultImage = getDefaultImagePath()
 
 export const CometDetailPage: FC = () => {
     const { id } = useParams<{ id: string }>()

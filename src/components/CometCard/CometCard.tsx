@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Comet } from '../../types'
+import { getDefaultImagePath } from '../../config/target_config'
 import './CometCard.css'
 
-const defaultImage = '/default-comet.png'
+const defaultImage = getDefaultImagePath()
 
 interface CometCardProps {
     comet: Comet

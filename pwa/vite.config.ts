@@ -2,16 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// Конфигурация для GitHub Pages
-const REPO_NAME = 'Frontend-Web-2025'
-// Для GitHub Pages используем base = /RepoName, для локальной разработки = /
-// При сборке (npm run build) автоматически будет использоваться base для GitHub Pages
-// Для Tauri билда (npm run build:tauri) используем base = /
-const isTauriBuild = process.env.TAURI_BUILD === 'true' || process.env.TAURI_PLATFORM !== undefined
-const isProduction = process.env.NODE_ENV === 'production' && !isTauriBuild
-const BASE_PATH = isProduction ? `/${REPO_NAME}` : '/'
-const START_URL = isProduction ? `/${REPO_NAME}/` : '/'
-const ICON_PATH = isProduction ? `/${REPO_NAME}/icon-192.png` : '/icon-192.png'
+// Конфигурация для PWA (локальная разработка)
+// base = '/' для локальной разработки
+const BASE_PATH = '/'
+const START_URL = '/'
+const ICON_PATH = '/icon-192.png'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -33,12 +28,12 @@ export default defineConfig({
                 orientation: 'portrait-primary',
                 icons: [
                     {
-                        src: isProduction ? `/${REPO_NAME}/icon-192.png` : '/icon-192.png',
+                        src: '/icon-192.png',
                         type: 'image/png',
                         sizes: '192x192',
                     },
                     {
-                        src: isProduction ? `/${REPO_NAME}/icon-512.png` : '/icon-512.png',
+                        src: '/icon-512.png',
                         type: 'image/png',
                         sizes: '512x512',
                     },

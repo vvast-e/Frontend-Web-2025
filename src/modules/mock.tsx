@@ -1,4 +1,7 @@
 import { Comet } from '../types'
+import { getDefaultImagePath } from '../config/target_config'
+
+const defaultImageUrl = getDefaultImagePath()
 
 export const COMETS_MOCK: Comet[] = [
     {
@@ -7,7 +10,7 @@ export const COMETS_MOCK: Comet[] = [
         description: 'Периодическая комета из семейства Юпитера. Возвращается к Земле каждые 75-76 лет. Последнее появление было в 1986 году, следующее ожидается в 2061 году.',
         price: 50000,
         image_key: 'halley.jpg',
-        image_url: '/default-comet.png',
+        image_url: defaultImageUrl,
         k_x: '0.587',
         k_y: '0.349',
         k_z: '-0.124',
@@ -18,7 +21,7 @@ export const COMETS_MOCK: Comet[] = [
         description: 'Одна из самых ярких комет XX века. Была видна невооруженным глазом рекордные 18 месяцев. Период обращения составляет около 2533 лет.',
         price: 75000,
         image_key: 'hale-bopp.jpg',
-        image_url: '/default-comet.png',
+        image_url: defaultImageUrl,
         k_x: '0.714',
         k_y: '-0.412',
         k_z: '0.568',
@@ -29,7 +32,7 @@ export const COMETS_MOCK: Comet[] = [
         description: 'Комета C/2020 F3 (NEOWISE), открытая космическим телескопом NEOWISE. Была видна невооруженным глазом в июле 2020 года.',
         price: 60000,
         image_key: 'neowise.jpg',
-        image_url: '/default-comet.png',
+        image_url: defaultImageUrl,
         k_x: '-0.123',
         k_y: '0.456',
         k_z: '0.789',
@@ -40,7 +43,7 @@ export const COMETS_MOCK: Comet[] = [
         description: 'Короткопериодическая комета с периодом обращения 6.45 лет. В 2014 году на неё совершил посадку космический аппарат "Розетта".',
         price: 80000,
         image_key: '67p.jpg',
-        image_url: '/default-comet.png',
+        image_url: defaultImageUrl,
         k_x: '0.234',
         k_y: '0.567',
         k_z: '-0.345',
