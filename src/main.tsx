@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './store'
-import { registerSW } from 'virtual:pwa-register'
-import { dest_root, target_tauri } from './config/target_config'
+import { dest_root } from './config/target_config'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.tsx'
 import './index.css'
@@ -19,17 +18,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </React.StrictMode>,
 )
 
-// Регистрируем service worker только для веб-версии, не для Tauri
-if (!target_tauri && 'serviceWorker' in navigator) {
-    registerSW({
-        onNeedRefresh() {
-            console.log('New content available, please refresh.')
-        },
-        onOfflineReady() {
-            console.log('App ready to work offline')
-        },
-    })
-}
-
-
+// Service worker не используется в Tauri
 

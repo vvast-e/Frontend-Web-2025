@@ -10,8 +10,7 @@
     ],
     "jsx": "react-jsx",
     "types": [
-      "vite/client",
-      "vite-plugin-pwa/client"
+      "vite/client"
     ],
     "skipLibCheck": true,
     /* Bundler mode */
@@ -32,3 +31,4 @@
     "src"
   ]
 }
+
