@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs'
 import { CometCard } from '../../components/CometCard/CometCard'
 import { ROUTE_LABELS } from '../../Routes'
@@ -7,17 +8,25 @@ import { getComets } from '../../modules/api'
 import { Spinner } from 'react-bootstrap'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { setTitle, resetFilters } from '../../store/slices/filtersSlice'
+import { loadCurrentRequest } from '../../store/slices/requestsSlice'
+import { ROUTES } from '../../Routes'
 import './CometsPage.css'
 
 export const CometsPage: FC = () => {
     const dispatch = useAppDispatch()
     const title = useAppSelector((state) => state.filters.title)
+    const { isAuthenticated } = useAppSelector((state) => state.auth)
+    const { currentRequest } = useAppSelector((state) => state.requests)
     const [loading, setLoading] = useState(false)
     const [comets, setComets] = useState<Comet[]>([])
 
     useEffect(() => {
         loadComets()
-    }, [])
+        // Загружаем текущую заявку пользователя при авторизации
+        if (isAuthenticated) {
+            dispatch(loadCurrentRequest())
+        }
+    }, [isAuthenticated])
 
     const loadComets = async (searchTitle?: string) => {
         setLoading(true)
@@ -74,10 +83,26 @@ export const CometsPage: FC = () => {
                             </button>
                         )}
                     </form>
-                    <div className="cart-card inactive" aria-label="cart">
-                        <div className="cart-title">Заявка</div>
-                        <div className="cart-count">Корзина пуста</div>
-                    </div>
+                    {isAuthenticated && (
+                        <Link
+                            to={currentRequest ? `${ROUTES.TRAJECTORY_CALCULATION.replace(':id', currentRequest.id.toString())}` : '#'}
+                            className={`cart-card ${currentRequest && currentRequest.distance_comets.length > 0 ? 'active' : 'inactive'}`}
+                            aria-label="cart"
+                            onClick={(e) => {
+                                if (!currentRequest || currentRequest.distance_comets.length === 0) {
+                                    e.preventDefault()
+                                }
+                            }}
+                        >
+                            <div className="cart-title">Заявка</div>
+                            <div className="cart-count">
+                                {currentRequest && currentRequest.distance_comets.length > 0
+                                    ? `${currentRequest.distance_comets.length} позиций`
+                                    : 'Корзина пуста'
+                                }
+                            </div>
+                        </Link>
+                    )}
                 </section>
 
                 {loading && (

@@ -61,9 +61,12 @@ export default defineConfig({
         },
     ],
     server: {
-        port: 3000,
         proxy: {
             '/api': {
+                target: 'http://localhost:8000',
+                changeOrigin: true,
+            },
+            '/logout': {
                 target: 'http://localhost:8000',
                 changeOrigin: true,
             },
@@ -77,7 +80,6 @@ export default defineConfig({
             usePolling: true,
         },
         host: true,
-        strictPort: true,
     },
 })
 

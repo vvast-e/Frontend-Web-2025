@@ -18,10 +18,13 @@ const filtersSlice = createSlice({
         resetFilters: (state) => {
             state.title = ''
         },
+        clearAllFilters: (state) => {
+            state.title = ''
+        },
     },
 })
 
-export const { setTitle, resetFilters } = filtersSlice.actions
+export const { setTitle, resetFilters, clearAllFilters } = filtersSlice.actions
 export default filtersSlice.reducer
 
 

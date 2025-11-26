@@ -27,11 +27,11 @@
     .search-form {
         flex-direction: column;
     }
-    
+
     .search-form input[type="text"] {
         width: 100%;
     }
-    
+
     .search-form button {
         width: 100%;
     }
@@ -171,4 +171,21 @@
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
+}
+
+.cart-card.active {
+    cursor: pointer;
+}
+
+.cart-link {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #f64137;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cart-link:hover {
+    text-decoration: underline;
 }
