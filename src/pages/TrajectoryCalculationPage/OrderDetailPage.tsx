@@ -90,7 +90,7 @@ export const TrajectoryCalculationPage: FC = () => {
     const canEdit = isDraft
 
     const handleEditComet = (comet: any) => {
-        setEditingComet(comet.id)
+        setEditingComet(comet.comet.id)
         setEditForm({
             quantity: comet.quantity,
             coords_x: comet.coords_x,
@@ -226,7 +226,7 @@ export const TrajectoryCalculationPage: FC = () => {
                                         <h3>{item.comet.name}</h3>
                                         {canEdit && (
                                             <div className="item-actions">
-                                                {editingComet === item.id ? (
+                                                {editingComet === item.comet.id ? (
                                                     <>
                                                         <button
                                                             className="btn btn-small btn-red"
@@ -254,7 +254,7 @@ export const TrajectoryCalculationPage: FC = () => {
                                                         </button>
                                                         <button
                                                             className="btn btn-small btn-red"
-                                                            onClick={() => handleRemoveComet(item.id)}
+                                                            onClick={() => handleRemoveComet(item.comet.id)}
                                                             disabled={loading}
                                                         >
                                                             Удалить

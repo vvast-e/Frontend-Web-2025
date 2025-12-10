@@ -82,12 +82,10 @@ interface AuthState {
     error: string | null
 }
 
-const storedEmail = localStorage.getItem('userEmail')
-
 const initialState: AuthState = {
     user: null,
-    userEmail: storedEmail,
-    isAuthenticated: localStorage.getItem('isAuthenticated') === 'true',
+    userEmail: null,
+    isAuthenticated: false,
     loading: false,
     error: null
 }
@@ -99,12 +97,12 @@ const authSlice = createSlice({
         clearError: (state) => {
             state.error = null
         },
-    setAuthFromStorage: (state) => {
-        const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'
-        const email = localStorage.getItem('userEmail')
-        state.isAuthenticated = isAuthenticated
-        state.userEmail = email
-    }
+        setAuthFromStorage: (state) => {
+            // При загрузке страницы сбрасываем авторизацию
+            state.isAuthenticated = false
+            state.userEmail = null
+            state.user = null
+        }
     },
     extraReducers: (builder) => {
         // Login

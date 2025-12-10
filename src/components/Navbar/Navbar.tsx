@@ -45,19 +45,16 @@ export const Navbar: FC = () => {
                 </Link>
 
                 {isAuthenticated ? (
-                    <div className="user-menu">
-                        <span className="user-name">{userEmail || 'Пользователь'}</span>
-                        <div className="user-dropdown">
-                            <Link to={ROUTES.PROFILE} className="dropdown-item">
-                                Личный кабинет
-                            </Link>
-                            <button
-                                className="dropdown-item logout-btn"
-                                onClick={handleLogout}
-                            >
-                                Выход
-                            </button>
-                        </div>
+                    <div className="nav-actions">
+                        <Link to={ROUTES.PROFILE} className="home-link">
+                            {userEmail || 'Пользователь'}
+                        </Link>
+                        <button
+                            className="home-link logout-btn"
+                            onClick={handleLogout}
+                        >
+                            Выход
+                        </button>
                     </div>
                 ) : (
                     <Link to={ROUTES.LOGIN} className="home-link">
@@ -85,9 +82,8 @@ export const Navbar: FC = () => {
 
                 {isAuthenticated ? (
                     <div className="mobile-user-info">
-                        <span className="user-name">{userEmail || 'Пользователь'}</span>
                         <Link to={ROUTES.PROFILE} className="home-link" onClick={closeMobileMenu}>
-                            Личный кабинет
+                            {userEmail || 'Пользователь'}
                         </Link>
                         <button
                             className="home-link logout-btn"

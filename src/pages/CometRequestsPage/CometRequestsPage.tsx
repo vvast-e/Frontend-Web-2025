@@ -77,9 +77,6 @@ export const CometRequestsPage: FC = () => {
             <div className="orders-container">
                 <div className="orders-header">
                     <h1>Мои заявки на кометы</h1>
-                    <Link to={ROUTES.COMETS} className="btn btn-red">
-                        Создать заявку
-                    </Link>
                 </div>
 
                 <div className="orders-toolbar">
@@ -116,45 +113,58 @@ export const CometRequestsPage: FC = () => {
                         {filteredRequests.length === 0 ? (
                             <div className="no-orders">
                                 <p>У вас пока нет заявок на кометы</p>
-                                <Link to={ROUTES.COMETS} className="btn btn-red">
-                                    Создать первую заявку
-                                </Link>
                             </div>
                         ) : (
-                            <div className="orders-table-wrapper">
-                                <table className="orders-table">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Дата создания</th>
-                                            <th>Статус</th>
-                                            <th>Позиций</th>
-                                            <th>Действия</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {filteredRequests.map((request) => (
-                                            <tr key={request.id}>
-                                                <td>#{request.id}</td>
-                                                <td>{formatDate(request.created_at)}</td>
-                                                <td>
-                                                    <span className={`status-badge ${STATUS_COLORS[request.status as keyof typeof STATUS_COLORS]}`}>
-                                                        {STATUS_LABELS[request.status as keyof typeof STATUS_LABELS]}
-                                                    </span>
-                                                </td>
-                                                <td>{getTotalItems(request)}</td>
-                                                <td>
-                                                    <Link
-                                                        to={`${ROUTES.TRAJECTORY_CALCULATION.replace(':id', request.id.toString())}`}
-                                                        className="btn btn-small btn-light"
-                                                    >
-                                                        Просмотр
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                            <div className="cards-grid">
+                                {filteredRequests.map((request) => (
+                                    <div key={request.id} className="order-card">
+                                        <div className="card-header">
+                                            <div>
+                                                <div className="card-id">Заявка #{request.id}</div>
+                                                <div className="card-date">{formatDate(request.created_at)}</div>
+                                            </div>
+                                            <span className={`status-badge ${STATUS_COLORS[request.status as keyof typeof STATUS_COLORS]}`}>
+                                                {STATUS_LABELS[request.status as keyof typeof STATUS_LABELS]}
+                                            </span>
+                                        </div>
+
+                                        <div className="card-info">
+                                            <span>Позиций: {getTotalItems(request)}</span>
+                                            {request.calculated_comets_count !== undefined && (
+                                                <span>Рассчитано: {request.calculated_comets_count}</span>
+                                            )}
+                                        </div>
+
+                                        <div className="card-results">
+                                            <div className="results-title">Результат</div>
+                                            {request.distance_comets && request.distance_comets.length > 0 ? (
+                                                <ul className="results-list">
+                                                    {request.distance_comets.map((c: any) => (
+                                                        <li key={c.id}>
+                                                            <span className="comet-name">{c.comet?.name || 'Комета'}</span>
+                                                            <span className="comet-distance">
+                                                                {c.distance_au !== null && c.distance_au !== undefined
+                                                                    ? `${c.distance_au} а.е.`
+                                                                    : '—'}
+                                                            </span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                <div className="results-empty">Нет комет в заявке</div>
+                                            )}
+                                        </div>
+
+                                        <div className="card-actions">
+                                            <Link
+                                                to={`${ROUTES.TRAJECTORY_CALCULATION.replace(':id', request.id.toString())}`}
+                                                className="btn btn-light"
+                                            >
+                                                Просмотр
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </>

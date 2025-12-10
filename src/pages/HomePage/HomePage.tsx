@@ -26,9 +26,6 @@ export const HomePage: FC = () => {
                         в астрономических единицах (а.е.).
                     </p>
                 </div>
-                <Link to={ROUTES.COMETS} className="btn btn-red">
-                    Перейти к услугам
-                </Link>
             </div>
         </>
     )
