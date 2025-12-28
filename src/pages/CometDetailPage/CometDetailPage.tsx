@@ -1,10 +1,11 @@
 import { FC, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs'
+import { QRCode } from '../../components/QRCode/QRCode'
 import { ROUTES, ROUTE_LABELS } from '../../Routes'
 import { Comet } from '../../types'
 import { getCometById } from '../../modules/api'
-import { getDefaultImagePath } from '../../config/target_config'
+import { getDefaultImagePath, getCometPageUrl } from '../../config/target_config'
 import { Spinner } from 'react-bootstrap'
 import './CometDetailPage.css'
 
@@ -66,15 +67,20 @@ export const CometDetailPage: FC = () => {
                 ]}
             />
             <article className="detail">
-                <img
-                    className="detail-image"
-                    src={imageUrl}
-                    alt={comet.name}
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement
-                        target.src = defaultImage
-                    }}
-                />
+                <div className="detail-image-column">
+                    <img
+                        className="detail-image"
+                        src={imageUrl}
+                        alt={comet.name}
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = defaultImage
+                        }}
+                    />
+                    {/* <div className="qr-code-section">
+                        <QRCode url={getCometPageUrl(comet.id)} size={120} />
+                    </div> */}
+                </div>
                 <div className="detail-body">
                     <h1>{comet.name}</h1>
                     <p className="desc">{comet.description}</p>

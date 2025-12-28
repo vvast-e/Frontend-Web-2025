@@ -1,35 +1,41 @@
 import { FC, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs'
 import { CometCard } from '../../components/CometCard/CometCard'
-import { ROUTE_LABELS } from '../../Routes'
+import { ROUTE_LABELS, ROUTES } from '../../Routes'
 import { Comet } from '../../types'
 import { getComets } from '../../modules/api'
 import { Spinner } from 'react-bootstrap'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { setTitle, resetFilters } from '../../store/slices/filtersSlice'
+import { getCartInfo } from '../../store/slices/requestSlice'
 import './CometsPage.css'
 
 export const CometsPage: FC = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const title = useAppSelector((state) => state.filters.title)
+    const app_id = useAppSelector((state) => state.request.app_id)
+    const count = useAppSelector((state) => state.request.count)
+    const isAuthenticated = useAppSelector((state) => state.user.isAuthenticated)
     const [loading, setLoading] = useState(false)
     const [comets, setComets] = useState<Comet[]>([])
-    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         loadComets()
-    }, [])
+        if (isAuthenticated) {
+            dispatch(getCartInfo())
+        }
+    }, [isAuthenticated])
 
     const loadComets = async (searchTitle?: string) => {
         setLoading(true)
-        setError(null)
         try {
             const searchValue = searchTitle !== undefined ? searchTitle : title
             const data = await getComets(searchValue || undefined)
             setComets(data)
-        } catch (error: any) {
-            setError('Не удалось подключиться к серверу. Убедитесь, что бэкенд запущен.')
-            setComets([])
+        } catch (error) {
+            console.error('Error loading comets:', error)
         } finally {
             setLoading(false)
         }
@@ -77,9 +83,16 @@ export const CometsPage: FC = () => {
                             </button>
                         )}
                     </form>
-                    <div className="cart-card inactive" aria-label="cart">
-                        <div className="cart-title">Заявка</div>
-                        <div className="cart-count">Корзина пуста</div>
+                    <div 
+                        className={isAuthenticated && app_id ? "cart-card" : "cart-card inactive"}
+                        aria-label="cart"
+                        onClick={isAuthenticated && app_id ? () => navigate(`${ROUTES.REQUEST}/${app_id}`) : undefined}
+                        style={isAuthenticated && app_id ? { cursor: 'pointer' } : {}}
+                    >
+                        <img src="/cart-icon.svg" alt="Корзина" className="cart-icon-img" />
+                        {(!isAuthenticated || !app_id) ? null : (
+                            count > 0 ? <span className="cart-badge">{count}</span> : null
+                        )}
                     </div>
                 </section>
 
@@ -89,13 +102,7 @@ export const CometsPage: FC = () => {
                     </div>
                 )}
 
-                {!loading && error && (
-                    <div className="error-message" style={{ padding: '20px', textAlign: 'center', color: '#d32f2f' }}>
-                        <p>{error}</p>
-                    </div>
-                )}
-
-                {!loading && !error && comets.length === 0 && (
+                {!loading && comets.length === 0 && (
                     <p className="no-results">Кометы не найдены</p>
                 )}
 

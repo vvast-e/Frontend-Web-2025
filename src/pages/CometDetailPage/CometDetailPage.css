@@ -37,6 +37,12 @@
     }
 }
 
+.detail-image-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .detail-image {
     width: 100%;
     max-height: 400px;
@@ -44,6 +50,16 @@
     border-radius: 12px;
     border: 1px solid #e5e7eb;
     background: #e5e7eb;
+}
+
+.qr-code-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
 }
 
 .detail-body h1 {
@@ -78,5 +94,11 @@
 
 .comet-coefficients strong {
     color: #000;
+}
+
+@media (max-width: 480px) {
+    .qr-code-section {
+        padding: 8px;
+    }
 }
 

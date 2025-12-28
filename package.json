@@ -8,11 +8,13 @@
     "build": "tsc && vite build",
     "build:tauri": "set TAURI_BUILD=true && tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "generate-api": "node scripts/generate-api.mjs"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.7.0",
     "@tauri-apps/cli": "^2.9.4",
+    "@vitejs/plugin-react": "^4.7.0",
+    "swagger-typescript-api": "^13.2.16",
     "typescript": "~5.9.3",
     "vite": "^7.1.7"
   },
@@ -22,12 +24,14 @@
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
+    "qrcode.react": "^4.2.0",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "vite-plugin-pwa": "^1.2.0"
   }
 }
-

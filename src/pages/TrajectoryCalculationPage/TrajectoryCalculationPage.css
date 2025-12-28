@@ -1,0 +1,254 @@
+/* Стили для страницы заявки */
+
+.request-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.request-action-btn {
+    min-width: 140px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Единые стили для верхних кнопок в цветовой палитре сайта */
+.request-action-btn.btn-primary {
+    background-color: #fff;
+    border-color: #000;
+    color: #000;
+}
+
+.request-action-btn.btn-primary:hover:not(:disabled) {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.request-action-btn.btn-primary:disabled {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.request-action-btn.btn-success {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+.request-action-btn.btn-success:hover:not(:disabled) {
+    background-color: #111827;
+    border-color: #111827;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.request-action-btn.btn-success:disabled {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.request-action-btn.btn-danger {
+    background-color: #f64137;
+    border-color: #f64137;
+    color: #fff;
+}
+
+.request-action-btn.btn-danger:hover:not(:disabled) {
+    background-color: #b60109;
+    border-color: #b60109;
+    box-shadow: 0 4px 14px rgba(246, 65, 55, 0.2);
+}
+
+.request-action-btn.btn-danger:disabled {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.request-action-btn:focus,
+.request-action-btn:active,
+.request-action-btn.active {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    outline: none;
+}
+
+.request-action-btn:not(:focus):not(:active):not(.active) {
+    box-shadow: none;
+}
+
+.comets-table {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.comets-table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    color: #495057;
+    padding: 12px 8px;
+    text-align: center;
+}
+
+.comets-table tbody td {
+    padding: 10px 8px;
+    vertical-align: middle;
+}
+
+.comet-name-cell {
+    font-weight: 500;
+    color: #212529;
+}
+
+.comet-price-cell {
+    color: #28a745;
+    font-weight: 500;
+    min-width: 90px;
+}
+
+.coord-input {
+    width: 80px;
+    font-size: 0.9rem;
+    padding: 4px 6px;
+    text-align: center;
+}
+
+.distance-cell {
+    font-family: 'Courier New', monospace;
+    color: #007bff;
+    font-weight: 500;
+    text-align: center;
+}
+
+.actions-cell {
+    white-space: nowrap;
+}
+
+.action-btn {
+    margin-right: 5px;
+    min-width: 80px;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.action-btn:last-child {
+    margin-right: 0;
+}
+
+/* Единые стили для всех кнопок действий в цветовой палитре сайта */
+.action-btn.btn-primary,
+.action-btn.btn-success,
+.action-btn.btn-danger,
+.action-btn.btn-secondary {
+    border: 1px solid;
+    font-weight: 600;
+}
+
+/* Кнопка "Изменить" - обычная кнопка (белый фон, черная граница) */
+.action-btn.btn-primary {
+    background-color: #fff;
+    border-color: #000;
+    color: #000;
+}
+
+.action-btn.btn-primary:hover:not(:disabled) {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.action-btn.btn-primary:disabled {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Кнопка "Сохранить" - черная кнопка */
+.action-btn.btn-success {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+.action-btn.btn-success:hover:not(:disabled) {
+    background-color: #111827;
+    border-color: #111827;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.action-btn.btn-success:disabled {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Кнопка "Удалить" - красная кнопка в стиле сайта */
+.action-btn.btn-danger {
+    background-color: #f64137;
+    border-color: #f64137;
+    color: #fff;
+}
+
+.action-btn.btn-danger:hover:not(:disabled) {
+    background-color: #b60109;
+    border-color: #b60109;
+    box-shadow: 0 4px 14px rgba(246, 65, 55, 0.2);
+}
+
+.action-btn.btn-danger:disabled {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Кнопка "Отмена" - светлая кнопка */
+.action-btn.btn-secondary {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #333;
+}
+
+.action-btn.btn-secondary:hover:not(:disabled) {
+    background-color: #e5e7eb;
+    border-color: #d1d5db;
+    color: #333;
+}
+
+.action-btn.btn-secondary:disabled {
+    background-color: #f7f7f7;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Убираем активное состояние, которое может влиять на другие кнопки */
+.action-btn:focus,
+.action-btn:active,
+.action-btn.active {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    outline: none;
+}
+
+.action-btn:not(:focus):not(:active):not(.active) {
+    box-shadow: none;
+}
+

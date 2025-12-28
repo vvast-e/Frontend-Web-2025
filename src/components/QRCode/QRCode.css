@@ -1,0 +1,25 @@
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-code-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+
+.qr-code-label {
+    margin-top: 6px;
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
